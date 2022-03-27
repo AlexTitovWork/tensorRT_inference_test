@@ -33,7 +33,7 @@
 ./__pycache__
 data/resnet50.onnx
 data/resnet50_engine.trt
-data/coffee_cup1.jpg
-data/coffee_cup2.jpg
+# data/coffee_cup1.jpg
+# data/coffee_cup2.jpg
 docs
 

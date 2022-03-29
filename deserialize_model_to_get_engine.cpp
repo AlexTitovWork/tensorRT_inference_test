@@ -186,7 +186,7 @@ int main(void){
 
     if (!planFile.is_open())
     {
-        sample::gLogError << "Could not open plan file: " << name_engine << std::endl;
+        // sample::gLogError << "Could not open plan file: " << name_engine << std::endl;
         return -1;
     }
 

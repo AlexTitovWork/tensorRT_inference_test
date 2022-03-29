@@ -43,16 +43,16 @@
 //     }
 // } logger;
 
-class Logger : public nvinfer1::ILogger
-{
-public:
-    void log(Severity severity, const char* msg) override {
-        // remove this 'if' if you need more logged info
-        if ((severity == Severity::kERROR) || (severity == Severity::kINTERNAL_ERROR) || (severity <= Severity::kWARNING)) {
-            std::cout << msg << "n";
-        }
-    }
-} gLogger;
+// class Logger : public nvinfer1::ILogger
+// {
+// public:
+//     void log(Severity severity, const char* msg) override {
+//         // remove this 'if' if you need more logged info
+//         if ((severity == Severity::kERROR) || (severity == Severity::kINTERNAL_ERROR) || (severity <= Severity::kWARNING)) {
+//             std::cout << msg << "n";
+//         }
+//     }
+// } gLogger;
 
 
 size_t getSizeByDim(const nvinfer1::Dims& dims)
@@ -191,7 +191,7 @@ int main(void){
     std::stringstream planBuffer;
     planBuffer << planFile.rdbuf();
     std::string plan = planBuffer.str();
-    IRuntime *runtime = createInferRuntime(gLogger);
+    IRuntime *runtime = createInferRuntime(logger);
     ICudaEngine *engine = runtime->deserializeCudaEngine((void *)plan.data(), plan.size(), nullptr);
     int batch_size = 1;
     

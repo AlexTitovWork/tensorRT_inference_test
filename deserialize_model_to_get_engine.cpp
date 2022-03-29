@@ -35,7 +35,7 @@ using namespace nvinfer1;
 
 // using namespace std;
 
-class Logger : public ILogger           
+class Logger : public nvinfer1::ILogger           
 {
     void log(Severity severity, const char* msg) noexcept override
     {
@@ -193,9 +193,7 @@ int main(void){
     std::stringstream planBuffer;
     planBuffer << planFile.rdbuf();
     std::string plan = planBuffer.str();
-    // IRuntime *runtime = createInferRuntime(logger);
-    IRuntime *runtime = createInferRuntime(&logger.log);
-
+    IRuntime *runtime = createInferRuntime(logger);
     ICudaEngine *engine = runtime->deserializeCudaEngine((void *)plan.data(), plan.size(), nullptr);
     int batch_size = 1;
     

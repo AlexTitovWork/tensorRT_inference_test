@@ -28,7 +28,7 @@
 // #include "opencv2/cudawarping.hpp"
 #include <opencv2/opencv.hpp>
 #include "opencv2/cudaimgproc.hpp"
-#include “NvInfer.h”
+#include "NvInfer.h"
 
 using namespace nvinfer1;
 // using namespace std;

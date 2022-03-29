@@ -31,15 +31,29 @@
 
 // using namespace std;
 
-class Logger : public ILogger           
+// using namespace std;
+
+// class Logger : public ILogger           
+// {
+//     void log(Severity severity, const char* msg) noexcept override
+//     {
+//         // suppress info-level messages
+//         if (severity <= Severity::kWARNING)
+//             std::cout << msg << std::endl;
+//     }
+// } logger;
+
+class Logger : public nvinfer1::ILogger
 {
-    void log(Severity severity, const char* msg) noexcept override
-    {
-        // suppress info-level messages
-        if (severity <= Severity::kWARNING)
-            std::cout << msg << std::endl;
+public:
+    void log(Severity severity, const char* msg) override {
+        // remove this 'if' if you need more logged info
+        if ((severity == Severity::kERROR) || (severity == Severity::kINTERNAL_ERROR) || (severity <= Severity::kWARNING)) {
+            std::cout << msg << "n";
+        }
     }
-} logger;
+} gLogger;
+
 
 size_t getSizeByDim(const nvinfer1::Dims& dims)
 {
@@ -160,7 +174,7 @@ int main(void){
     // Create and save engine
     // std::string name_engine = "/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/resnet50_engine.trt";
     std::string name_engine = "./data/resnet50_engine.trt";
-    std::string image_path = "/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/coffee_cup1.jpg";
+    std::string image_path = "./data/coffee_cup1.jpg";
     bool create_engine = true;
 
     // cout << "Loading TensorRT engine from plan file..." << endl;
@@ -177,7 +191,7 @@ int main(void){
     std::stringstream planBuffer;
     planBuffer << planFile.rdbuf();
     std::string plan = planBuffer.str();
-    IRuntime *runtime = createInferRuntime(logger);
+    IRuntime *runtime = createInferRuntime(gLogger);
     ICudaEngine *engine = runtime->deserializeCudaEngine((void *)plan.data(), plan.size(), nullptr);
     int batch_size = 1;
     

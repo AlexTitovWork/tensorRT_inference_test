@@ -3,4 +3,5 @@ OUTNAME_DEBUG   = deserialize_model_to_get_engine_debug
 EXTRA_DIRECTORIES = ../common
 SAMPLE_DIR_NAME = $(shell basename $(dir $(abspath $(firstword $(MAKEFILE_LIST)))))
 MAKEFILE ?= ../Makefile.config
+LDIR = /usr/lib/x86_64-linux-gnu
 include $(MAKEFILE)

@@ -193,7 +193,9 @@ int main(void){
     std::stringstream planBuffer;
     planBuffer << planFile.rdbuf();
     std::string plan = planBuffer.str();
-    IRuntime *runtime = createInferRuntime(logger);
+    // IRuntime *runtime = createInferRuntime(logger);
+    IRuntime *runtime = createInferRuntime();
+
     ICudaEngine *engine = runtime->deserializeCudaEngine((void *)plan.data(), plan.size(), nullptr);
     int batch_size = 1;
     

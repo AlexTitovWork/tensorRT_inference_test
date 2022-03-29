@@ -180,7 +180,7 @@ int main(void){
     bool create_engine = true;
 
     // cout << "Loading TensorRT engine from plan file..." << endl;
-    sample::gLogInfo << "Loading TensorRT engine from plan file " << name_engine << std::endl;
+    // sample::gLogInfo << "Loading TensorRT engine from plan file " << name_engine << std::endl;
 
     std::ifstream planFile(name_engine);
 

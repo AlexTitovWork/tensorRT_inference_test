@@ -27,8 +27,8 @@ SET(CUDA_INCLUDE_DIRS /home/alex/lib/cuda-11.6-cudnn8.3.2/include)
 # Add TensorRT
 
 SET(CMAKE_PREFIX_PATH /usr/lib/x86_64-linux-gnu)
-SET(LDIR /usr/lib/x86_64-linux-gnu)
-SET(TRT_LIB_DIR /usr/lib/x86_64-linux-gnu)
+# SET(LDIR /usr/lib/x86_64-linux-gnu)
+# SET(TRT_LIB_DIR /usr/lib/x86_64-linux-gnu)
 
 
 if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)

@@ -23,7 +23,7 @@ SET(CUDA_cublas_device_LIBRARY /home/alex/lib/cuda-11.6-cudnn8.3.2/lib64)
 #SET(CUDA_INCLUDE_DIRS /usr/local/cuda-11.6/include)
 SET(CUDA_INCLUDE_DIRS /home/alex/lib/cuda-11.6-cudnn8.3.2/include)
 
-
+SET(LDIR /usr/lib/x86_64-linux-gnu)
 SET(TRT_LIB_DIR /usr/lib/x86_64-linux-gnu)
 
 
@@ -61,7 +61,7 @@ message(STATUS "TORCH_LIBRARIES = ${TORCH_LIBRARIES}")
 
 # Add TensorRT
 
-list(APPEND CMAKE_PREFIX_PATH /usr/lib/x86_64-linux-gnu)
+ CMAKE_PREFIX_PATH /usr/lib/x86_64-linux-gnu
 
  
 include(CTest)

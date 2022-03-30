@@ -27,7 +27,9 @@ SET(CUDA_INCLUDE_DIRS /home/alex/lib/cuda-11.6-cudnn8.3.2/include)
 # Add TensorRT
 
 SET(CMAKE_PREFIX_PATH /usr/lib/x86_64-linux-gnu)
-SET(CMAKE_PREFIX_PATH /home/alex/lib/libtorch)
+
+
+set(OpenCV_DIR /home/alex/local/lib/cmake/opencv4)
 
 # SET(LDIR /usr/lib/x86_64-linux-gnu)
 # SET(TRT_LIB_DIR /usr/lib/x86_64-linux-gnu)
@@ -57,8 +59,8 @@ find_package(CUDA REQUIRED PATHS="/home/alex/lib/cuda-11.6-cudnn8.3.2")
 # Solution. need 1.10.2-cu113 torch version, for CUDA 11.6
 
 # use 1.10.2-cu113 for cuda 11.6
-list(APPEND CMAKE_PREFIX_PATH ../libtorch)
-find_package(Torch REQUIRED)
+# list(APPEND CMAKE_PREFIX_PATH ../libtorch)
+find_package(Torch REQUIRED /home/alex/lib/libtorch)
 message(STATUS "TORCH_LIBRARIES = ${TORCH_LIBRARIES}")
 
 # set(OpenCV_DIR /usr/local/lib/cmake/opencv4)

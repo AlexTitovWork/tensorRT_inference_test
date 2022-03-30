@@ -94,7 +94,9 @@ set_property(TARGET deserialize_model_to_get_engine
 target_link_libraries(deserialize_model_to_get_engine PRIVATE 
                         ${TORCH_LIBRARIES} 
                         ${OpenCV_LIBS}
-                        /usr/lib/x86_64-linux-gnu/libnvinfer.so)
+                        /usr/lib/x86_64-linux-gnu/libnvinfer.so
+                        /usr/lib/x86_64-linux-gnu/libnvinfer.so.8
+                        /usr/lib/x86_64-linux-gnu/libnvinfer.so.8.4.0 )
 # target_link_libraries(loader_torch_init_step PRIVATE ${TORCH_LIBRARIES} )
 
 # target_link_libraries(particle_cuda_test PRIVATE particles_new_lib)

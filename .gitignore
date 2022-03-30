@@ -36,4 +36,6 @@ data/resnet50_engine.trt
 # data/coffee_cup1.jpg
 # data/coffee_cup2.jpg
 docs
-
+#Make files and other build stuff
+CMakeFiles
+CMakeCache.txt

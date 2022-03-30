@@ -4,6 +4,7 @@
         "*.tcc": "cpp",
         "complex": "cpp",
         "__tree": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "unordered_set": "cpp"
     }
 }

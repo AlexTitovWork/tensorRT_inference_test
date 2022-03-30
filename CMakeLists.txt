@@ -24,17 +24,7 @@ SET(CUDA_cublas_device_LIBRARY /home/alex/lib/cuda-11.6-cudnn8.3.2/lib64)
 SET(CUDA_INCLUDE_DIRS /home/alex/lib/cuda-11.6-cudnn8.3.2/include)
 
 
-set(Torch /home/alex/local/lib/cmake/opencv4)
-
-# Add TensorRT
-
-SET(CMAKE_PREFIX_PATH /usr/lib/x86_64-linux-gnu)
-
-
-set(OpenCV_DIR /home/alex/local/lib/cmake/opencv4)
-
-# SET(LDIR /usr/lib/x86_64-linux-gnu)
-# SET(TRT_LIB_DIR /usr/lib/x86_64-linux-gnu)
+SET(TRT_LIB_DIR /usr/lib/x86_64-linux-gnu)
 
 
 if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
@@ -62,15 +52,16 @@ find_package(CUDA REQUIRED PATHS="/home/alex/lib/cuda-11.6-cudnn8.3.2")
 
 # use 1.10.2-cu113 for cuda 11.6
 # list(APPEND CMAKE_PREFIX_PATH ../libtorch)
-# find_package(Torch REQUIRED /home/alex/lib/libtorch)
-find_package(Torch REQUIRED)
-message(STATUS "TORCH_LIBRARIES = ${TORCH_LIBRARIES}")
+# find_package(Torch REQUIRED)
+# message(STATUS "TORCH_LIBRARIES = ${TORCH_LIBRARIES}")
 
 # set(OpenCV_DIR /usr/local/lib/cmake/opencv4)
 # list(APPEND CMAKE_PREFIX_PATH  ./opencv4)
 
 
+# Add TensorRT
 
+list(APPEND CMAKE_PREFIX_PATH /usr/lib/x86_64-linux-gnu)
 
  
 include(CTest)
@@ -93,6 +84,7 @@ find_package(OpenCV REQUIRED PATHS)
 # include_directories( ${OpenCV_INCLUDE_DIRS} )
 message(STATUS "OpenCV_LIBS = ${OpenCV_LIBS}")
 
+LDIR = /usr/lib/x86_64-linux-gnu
   
 # Request that particles_new_lib be built with -std=c++11
 # As this is a public compile feature anything that links to 
@@ -111,8 +103,9 @@ add_executable(deserialize_model_to_get_engine deserialize_model_to_get_engine.c
 set_property(TARGET deserialize_model_to_get_engine 
              PROPERTY CUDA_SEPARABLE_COMPILATION ON)
 
+target_link_libraries(deserialize_model_to_get_engine PRIVATE "${OpenCV_LIBS}"  )
 
-target_link_libraries(deserialize_model_to_get_engine PRIVATE ${TORCH_LIBRARIES} ${OpenCV_LIBS})
+# target_link_libraries(deserialize_model_to_get_engine PRIVATE ${TORCH_LIBRARIES} ${OpenCV_LIBS})
 # target_link_libraries(particle_cuda_test PRIVATE particles_new_lib)
 
 # LINK LIBRARIES

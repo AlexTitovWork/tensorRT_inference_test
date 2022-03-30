@@ -25,7 +25,7 @@
 
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include <opencv2/highgui.hpp>
+// #include <opencv2/highgui.hpp>
 
 
 // #include <opencv2/core/core.hpp>
@@ -34,6 +34,7 @@
 
 // #include "opencv2/core.hpp"
 // #include "opencv2/cudawarping.hpp"
+#include <opencv2/cuda.hpp>
 #include <opencv2/cudaimgproc.hpp>
 
 
@@ -114,6 +115,9 @@ void preprocessImage(const std::string& image_path, float* gpu_input, const nvin
     if (frame.empty())    {
         std::cerr << "Input image " << image_path << " load failed\n";
         return;
+    }
+    else {
+        std::cout<<image_path<< " image loaded successfully !" <<std::endl;
     }
     cv::cuda::GpuMat gpu_frame;
     // upload image to GPU

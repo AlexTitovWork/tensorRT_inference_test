@@ -127,23 +127,23 @@ void preprocessImage(const std::string& image_path, float* gpu_input, const nvin
     auto input_size = cv::Size(input_width, input_height);
     // resize
     cv::cuda::GpuMat resized;
-    cv::cuda::resize(gpu_frame, resized, input_size, 0, 0, cv::INTER_NEAREST);
-    // cv::resize(gpu_frame, resized, input_size, 0, 0, cv::INTER_NEAREST);
+    // cv::cuda::resize(gpu_frame, resized, input_size, 0, 0, cv::INTER_NEAREST);
+    cv::resize(gpu_frame, resized, input_size, 0, 0, cv::INTER_NEAREST);
 
     cv::cuda::GpuMat flt_image;
     resized.convertTo(flt_image, CV_32FC3, 1.f / 255.f);
-    cv::cuda::subtract(flt_image, cv::Scalar(0.485f, 0.456f, 0.406f), flt_image, cv::noArray(), -1);
-    // cv::subtract(flt_image, cv::Scalar(0.485f, 0.456f, 0.406f), flt_image, cv::noArray(), -1);
+    // cv::cuda::subtract(flt_image, cv::Scalar(0.485f, 0.456f, 0.406f), flt_image, cv::noArray(), -1);
+    cv::subtract(flt_image, cv::Scalar(0.485f, 0.456f, 0.406f), flt_image, cv::noArray(), -1);
 
-    cv::cuda::divide(flt_image, cv::Scalar(0.229f, 0.224f, 0.225f), flt_image, 1, -1);
-    // cv::divide(flt_image, cv::Scalar(0.229f, 0.224f, 0.225f), flt_image, 1, -1);
-    
+    // cv::cuda::divide(flt_image, cv::Scalar(0.229f, 0.224f, 0.225f), flt_image, 1, -1);
+    cv::divide(flt_image, cv::Scalar(0.229f, 0.224f, 0.225f), flt_image, 1, -1);
+
     std::vector< cv::cuda::GpuMat > chw;
     for (size_t i = 0; i < channels; ++i){
         chw.emplace_back(cv::cuda::GpuMat(input_size, CV_32FC1, gpu_input + i * input_width * input_height));
     }
-    cv::cuda::split(flt_image, chw);
-    // cv::split(flt_image, chw);
+    // cv::cuda::split(flt_image, chw);
+    cv::split(flt_image, chw);
 
 }
 

@@ -100,4 +100,4 @@ target_link_libraries(deserialize_model_to_get_engine PRIVATE ${TORCH_LIBRARIES}
 # target_link_libraries(particle_cuda_test PRIVATE "${TORCH_LIBRARIES}")
 
 # target_link_libraries(particle_cuda_test PRIVATE particles_new_lib) # Duplicate link, use if not use ${TORCH_LIBRARIES} ${OpenCV_LIBS} libs common.
-set_property(TARGET loader_torch_init_step PROPERTY CXX_STANDARD 14)
+set_property(TARGET deserialize_model_to_get_engine PROPERTY CXX_STANDARD 14)

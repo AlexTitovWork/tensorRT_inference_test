@@ -23,6 +23,10 @@ SET(CUDA_cublas_device_LIBRARY /home/alex/lib/cuda-11.6-cudnn8.3.2/lib64)
 #SET(CUDA_INCLUDE_DIRS /usr/local/cuda-11.6/include)
 SET(CUDA_INCLUDE_DIRS /home/alex/lib/cuda-11.6-cudnn8.3.2/include)
 
+
+SET(TRT_LIB_DIR /usr/lib/x86_64-linux-gnu)
+
+
 if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
   set(CMAKE_CUDA_ARCHITECTURES 50)
 endif()
@@ -55,6 +59,10 @@ message(STATUS "TORCH_LIBRARIES = ${TORCH_LIBRARIES}")
 # list(APPEND CMAKE_PREFIX_PATH  ./opencv4)
 
 
+# Add TensorRT
+
+list(APPEND CMAKE_PREFIX_PATH /usr/lib/x86_64-linux-gnu)
+
  
 include(CTest)
 include_directories(${CMAKE_SOURCE_DIR})
@@ -76,7 +84,7 @@ find_package(OpenCV REQUIRED PATHS)
 # include_directories( ${OpenCV_INCLUDE_DIRS} )
 message(STATUS "OpenCV_LIBS = ${OpenCV_LIBS}")
 
-
+USER_LIBS = -l
   
 # Request that particles_new_lib be built with -std=c++11
 # As this is a public compile feature anything that links to 

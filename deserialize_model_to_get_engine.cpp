@@ -24,13 +24,13 @@
 #include "sampleEngines.h"
 
 #include <iostream>
-// #include <opencv2/opencv.hpp>
-// #include <opencv2/highgui.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/highgui.hpp>
 
 
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
+// #include <opencv2/core/core.hpp>
+// #include <opencv2/highgui/highgui.hpp>
+// #include <opencv2/imgproc/imgproc.hpp>
 
 // #include "opencv2/core.hpp"
 // #include "opencv2/cudawarping.hpp"
@@ -41,16 +41,16 @@ using namespace nvinfer1;
 // using namespace std;
 
 // using namespace std;
-static Logger gLogger;
-// class Logger : public nvinfer1::ILogger           
-// {
-//     void log(Severity severity, const char* msg) noexcept override
-//     {
-//         // suppress info-level messages
-//         if (severity <= Severity::kWARNING)
-//             std::cout << msg << std::endl;
-//     }
-// } logger;
+// static Logger gLogger;
+class Logger : public nvinfer1::ILogger           
+{
+    void log(Severity severity, const char* msg) noexcept override
+    {
+        // suppress info-level messages
+        if (severity <= Severity::kWARNING)
+            std::cout << msg << std::endl;
+    }
+} logger;
 
 // class Logger : public nvinfer1::ILogger
 // {
@@ -200,10 +200,10 @@ int main(void){
     std::stringstream planBuffer;
     planBuffer << planFile.rdbuf();
     std::string plan = planBuffer.str();
-    // IRuntime *runtime = createInferRuntime(logger);
+    IRuntime *runtime = createInferRuntime(logger);
     
-    
-    IRuntime* runtime = createInferRuntime(gLogger);
+
+    // IRuntime* runtime = createInferRuntime(gLogger);
 
     
     ICudaEngine *engine = runtime->deserializeCudaEngine((void *)plan.data(), plan.size(), nullptr);

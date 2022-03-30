@@ -24,7 +24,7 @@ SET(CUDA_cublas_device_LIBRARY /home/alex/lib/cuda-11.6-cudnn8.3.2/lib64)
 SET(CUDA_INCLUDE_DIRS /home/alex/lib/cuda-11.6-cudnn8.3.2/include)
 
 
-SET(TRT_LIB_DIR /usr/lib/x86_64-linux-gnu)
+# SET(TRT_LIB_DIR /usr/lib/x86_64-linux-gnu)
 
 
 if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
@@ -61,14 +61,14 @@ find_package(CUDA REQUIRED PATHS="/home/alex/lib/cuda-11.6-cudnn8.3.2")
 
 # Add TensorRT
 
-list(APPEND CMAKE_PREFIX_PATH /usr/lib/x86_64-linux-gnu)
+# list(APPEND CMAKE_PREFIX_PATH /usr/lib/x86_64-linux-gnu)
 
  
 include(CTest)
 include_directories(${CMAKE_SOURCE_DIR})
 include_directories(../common)
 
-find_package(CUDA REQUIRED)
+# find_package(CUDA REQUIRED)
 
 # libtorch with OpenCV support , with fixed Target BUG !!!!! 
 # list(APPEND CMAKE_PREFIX_PATH ./libtorch)

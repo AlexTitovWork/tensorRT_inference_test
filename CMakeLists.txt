@@ -38,6 +38,9 @@ include(CTest)
 
 include_directories(${CMAKE_SOURCE_DIR})
 
+INCLUDE_DIRECTORIES(
+  /usr/src/tensorrt/samples/common
+    )
 
 include_directories(../common)
 
@@ -88,7 +91,10 @@ add_executable(deserialize_model_to_get_engine deserialize_model_to_get_engine.c
 set_property(TARGET deserialize_model_to_get_engine 
              PROPERTY CUDA_SEPARABLE_COMPILATION ON)
 
-target_link_libraries(deserialize_model_to_get_engine PRIVATE ${TORCH_LIBRARIES} ${OpenCV_LIBS})
+target_link_libraries(deserialize_model_to_get_engine PRIVATE 
+                        ${TORCH_LIBRARIES} 
+                        ${OpenCV_LIBS}
+                        /usr/lib/x86_64-linux-gnu/libnvinfer.so)
 # target_link_libraries(loader_torch_init_step PRIVATE ${TORCH_LIBRARIES} )
 
 # target_link_libraries(particle_cuda_test PRIVATE particles_new_lib)

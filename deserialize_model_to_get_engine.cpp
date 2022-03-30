@@ -210,6 +210,7 @@ int main(void){
     int batch_size = 1;
     
     if (engine != NULL){
+        
         std::cout<<"Engine loaded successfully!"<<std::endl;
 
         IExecutionContext *context = engine->createExecutionContext();

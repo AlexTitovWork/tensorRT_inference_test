@@ -61,7 +61,7 @@ message(STATUS "TORCH_LIBRARIES = ${TORCH_LIBRARIES}")
 
 # Add TensorRT
 
- CMAKE_PREFIX_PATH /usr/lib/x86_64-linux-gnu
+CMAKE_PREFIX_PATH "/usr/lib/x86_64-linux-gnu"
 
  
 include(CTest)

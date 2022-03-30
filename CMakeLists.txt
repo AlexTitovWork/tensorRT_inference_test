@@ -84,7 +84,6 @@ find_package(OpenCV REQUIRED PATHS)
 # include_directories( ${OpenCV_INCLUDE_DIRS} )
 message(STATUS "OpenCV_LIBS = ${OpenCV_LIBS}")
 
-USER_LIBS = -l
   
 # Request that particles_new_lib be built with -std=c++11
 # As this is a public compile feature anything that links to 

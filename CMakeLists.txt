@@ -38,10 +38,10 @@ include(CTest)
 
 include_directories(${CMAKE_SOURCE_DIR})
 
-INCLUDE_DIRECTORIES(
-  /usr/src/tensorrt/samples/common
-    )
 
+# TensorRT add Includes
+INCLUDE_DIRECTORIES(
+  /usr/src/tensorrt/samples/common)
 include_directories(../common)
 
 
@@ -90,6 +90,8 @@ add_executable(deserialize_model_to_get_engine deserialize_model_to_get_engine.c
 
 set_property(TARGET deserialize_model_to_get_engine 
              PROPERTY CUDA_SEPARABLE_COMPILATION ON)
+
+# TensorRT add library
 
 target_link_libraries(deserialize_model_to_get_engine PRIVATE 
                         ${TORCH_LIBRARIES} 

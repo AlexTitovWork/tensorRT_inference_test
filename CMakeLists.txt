@@ -37,7 +37,10 @@ project(cmake_and_cuda LANGUAGES CXX CUDA)
 include(CTest)
 
 include_directories(${CMAKE_SOURCE_DIR})
+
+
 include_directories(../common)
+
 
 
 # Use new location in home dir

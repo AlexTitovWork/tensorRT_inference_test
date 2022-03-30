@@ -98,7 +98,12 @@ target_link_libraries(deserialize_model_to_get_engine PRIVATE
                         ${OpenCV_LIBS}
                         /usr/lib/x86_64-linux-gnu/libnvinfer.so
                         /usr/lib/x86_64-linux-gnu/libnvinfer.so.8
-                        /usr/lib/x86_64-linux-gnu/libnvinfer.so.8.4.0 )
+                        /usr/lib/x86_64-linux-gnu/libnvinfer.so.8.4.0
+                        /usr/lib/x86_64-linux-gnu/libnvidia-allocator.so
+                        /usr/lib/x86_64-linux-gnu/libnvidia-cfg.so 
+                        /usr/lib/x86_64-linux-gnu/libnvinfer_plugin.so
+                        /usr/lib/x86_64-linux-gnu/libnvinfer_plugin.so.8
+                        /usr/lib/x86_64-linux-gnu/libnvinfer_plugin.so.8.4.0)
 # target_link_libraries(loader_torch_init_step PRIVATE ${TORCH_LIBRARIES} )
 
 # target_link_libraries(particle_cuda_test PRIVATE particles_new_lib)

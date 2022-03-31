@@ -194,7 +194,9 @@ int main(void){
     // Create and save engine
     // std::string name_engine = "/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/resnet50_engine.trt";
     std::string name_engine = "./data/resnet50_engine.trt";
-    std::string image_path = "./data/coffee_cup1.jpg";
+    // std::string image_path = "./data/coffee_cup1.jpg";
+    std::string image_path = "./data/coffee_cup2.jpg";
+
     bool create_engine = true;
 
     // cout << "Loading TensorRT engine from plan file..." << endl;

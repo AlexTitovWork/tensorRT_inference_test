@@ -31,7 +31,7 @@
 // #include <opencv2/core/core.hpp>
 // #include <opencv2/highgui/highgui.hpp>
 // #include <opencv2/imgproc/imgproc.hpp>
-#include<cuda.hpp>
+#include <opencv2/core/cuda.hpp>
 #include <opencv2/core.hpp>
 #include <opencv2/cudawarping.hpp>
 #include <opencv2/cudaimgproc.hpp>

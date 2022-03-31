@@ -161,7 +161,7 @@ void preprocessImage(const std::string& image_path, float* gpu_input, const nvin
 void postprocessResults(float *gpu_output, const nvinfer1::Dims &dims, int batch_size)
 {
     // get class names
-    auto classes = getClassNames("/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/imagenet_classes.txt");
+    auto classes = getClassNames("./data/imagenet_classes.txt");
 
     // copy results from GPU to CPU
     std::vector< float > cpu_output(getSizeByDim(dims) * batch_size);

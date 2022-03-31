@@ -256,6 +256,7 @@ int main(void){
         // post-process results
         postprocessResults((float *) buffers[1], output_dims[0], batch_size);
 
+        std::cout<<"Processing completes !"<<std::endl;
         for (void* buf : buffers)
         {
             cudaFree(buf);

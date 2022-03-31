@@ -257,14 +257,14 @@ int main(void){
         postprocessResults((float *) buffers[1], output_dims[0], batch_size);
 
         std::cout<<"Processing completes !"<<std::endl;
-        for (void* buf : buffers)
-        {
-            cudaFree(buf);
+        // for (void* buf : buffers)
+        // {
+        //     cudaFree(buf);
 
-            context->destroy();
-            engine->destroy();
-            runtime->destroy();
-        }
+        //     context->destroy();
+        //     engine->destroy();
+        //     runtime->destroy();
+        // }
         return 0;
     }
     else {

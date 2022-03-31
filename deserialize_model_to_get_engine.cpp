@@ -35,10 +35,14 @@
 #include <opencv2/core.hpp>
 #include <opencv2/cudawarping.hpp>
 #include <opencv2/cudaimgproc.hpp>
+// for cuda::divide support operation
+#include <opencv2/cudaarithm.hpp>
 
 
 using namespace nvinfer1;
-// using namespace std;
+using namespace std;
+using namespace cv;
+
 
 // using namespace std;
 // static Logger gLogger;

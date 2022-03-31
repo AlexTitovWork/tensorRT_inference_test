@@ -182,7 +182,7 @@ void postprocessResults(float *gpu_output, const nvinfer1::Dims &dims, int batch
         {
             std::cout << "class: " << classes[indices[i]] << " | ";
         }
-        std::cout << "confidence: " << 100 * cpu_output[indices[i]] / sum << "% | index: " << indices[i] << "n";
+        std::cout << "confidence: " << 100 * cpu_output[indices[i]] / sum << "% | index: " << indices[i] << "\n";
         ++i;
     }
 }

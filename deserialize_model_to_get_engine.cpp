@@ -44,6 +44,19 @@ using namespace std;
 using namespace cv;
 
 
+/**
+ * @brief Model prepare ResNet50
+ *
+ * Tensor RT model. trt
+ * https://drive.google.com/file/d/1TPRzPTkiLvldBjJq30S6d_rFCvSyEUDh/view?usp=sharing
+
+ * ONNX model. trt
+ * https://drive.google.com/file/d/1QNy35xFlonuNdAXXNuCKEBdm-z38XaHC/view?usp=sharing
+ *  
+ */
+
+
+
 // using namespace std;
 // static Logger gLogger;
 class Logger : public nvinfer1::ILogger           

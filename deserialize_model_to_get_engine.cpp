@@ -252,13 +252,18 @@ int main(void){
         }
 
                 // preprocess input data
+
         preprocessImage(image_path, (float*)buffers[0], input_dims[0]);
+        std::cout << "Preprocessing of image ok! " << name_engine << std::endl;
+
         // inference
         context->enqueue(batch_size, buffers.data(), 0, nullptr);
+        std::cout << "context->enqueue(batch_size, buffers.data(), 0, nullptr) of data ok! " << name_engine << std::endl;
+
         // post-process results
         postprocessResults((float *) buffers[1], output_dims[0], batch_size);
 
-        std::cout<<"Processing completes !"<<std::endl;
+        std::cout<<"Processing of image ok!"<<std::endl;
         // for (void* buf : buffers)
         // {
         //     cudaFree(buf);

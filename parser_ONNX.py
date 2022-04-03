@@ -90,17 +90,18 @@ if __name__ == '__main__':
     # 1. First phase Build engine from ONNX format
     # initialize TensorRT engine and parse ONNX model
     # ONNX_FILE_PATH = "/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/resnet50.onnx"
-    ONNX_FILE_PATH = "./data/resnet50.onnx"
-    
-    engine, context = build_engine(ONNX_FILE_PATH)
+    # 
+    # ONNX_FILE_PATH = "./data/resnet50.onnx"
+    # engine, context = build_engine(ONNX_FILE_PATH)
     
     # 2. Second phase serialize engine 
     # Serialize engine and save it to the drive
-    build_and_serialized_engine(engine)
+    # 
+    # build_and_serialized_engine(engine)
 
     # 3. Third phase load engine from drive.
 
-    # engine, context, runtime = load_and_deserialized_engine()
+    engine, context, runtime = load_and_deserialized_engine()
 
     # get sizes of input and output and allocate memory required for input data and for output data
     for binding in engine:
@@ -117,7 +118,9 @@ if __name__ == '__main__':
     stream = cuda.Stream()
 
         # preprocess input data
-    host_input = np.array(preprocess_image("/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/coffee_cup1.jpg").numpy(), dtype=np.float32, order='C')
+    # host_input = np.array(preprocess_image("/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/coffee_cup1.jpg").numpy(), dtype=np.float32, order='C')
+    host_input = np.array(preprocess_image("./data/coffee_cup1.jpg").numpy(), dtype=np.float32, order='C')
+
     # host_input = np.array(preprocess_image("/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/sofa.jpeg").numpy(), dtype=np.float32, order='C')
 
     cuda.memcpy_htod_async(device_input, host_input, stream)

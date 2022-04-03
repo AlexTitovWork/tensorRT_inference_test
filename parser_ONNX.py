@@ -28,6 +28,8 @@ def build_engine(onnx_file_path):
 
         # allow TensorRT to use up to 1GB of GPU memory for tactic selection
     # builder.max_workspace_size = 1 << 30
+
+    #New API in 8.XX TensoarRT
     config = builder.create_builder_config()
     config.max_workspace_size = 1 << 20
     
@@ -35,7 +37,11 @@ def build_engine(onnx_file_path):
     builder.max_batch_size = 1
     # use FP16 mode if possible
     if builder.platform_has_fast_fp16:
-        builder.fp16_mode = True
+        # for GTX 8050m  
+        # builder.fp16_mode = True
+        # https://github.com/NVIDIA/TensorRT/issues/1820 on RTX3090
+        config.set_flag(trt.BuilderFlag.FP16)
+
 
      # generate TensorRT engine optimized for the target platform
     print('Building an engine...')

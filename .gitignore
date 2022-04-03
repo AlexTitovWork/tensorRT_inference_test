@@ -31,6 +31,7 @@
 *.out
 *.app
 ./__pycache__
+data/serialized_engine_python.trt
 data/resnet50.onnx
 data/resnet50_engine.trt
 # data/coffee_cup1.jpg

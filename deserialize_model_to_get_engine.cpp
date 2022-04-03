@@ -257,6 +257,8 @@ int main(void){
             {
                 output_dims.emplace_back(engine->getBindingDimensions(i));
             }
+            std::cout<<"engine->getNbBindings() successfully!"<<std::endl;
+
         }
         if (input_dims.empty() || output_dims.empty())
         {

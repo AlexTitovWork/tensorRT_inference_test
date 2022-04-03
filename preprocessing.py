@@ -26,7 +26,9 @@ def preprocess_image(img_path):
 # Get human readeable format
 def postprocess(output_data):
     # get class names
-    with open("/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/imagenet_classes.txt") as f:
+    # with open("/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/imagenet_classes.txt") as f:
+    with open("./data/imagenet_classes.txt") as f:
+
         classes = [line.strip() for line in f.readlines()]
     # calculate human-readable value by softmax
     confidences = torch.nn.functional.softmax(output_data, dim=1)[0] * 100

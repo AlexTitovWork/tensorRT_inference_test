@@ -26,13 +26,19 @@ def build_engine(onnx_file_path):
         parser.parse(model.read())
     print('Completed parsing of ONNX file')
 
-        # allow TensorRT to use up to 1GB of GPU memory for tactic selection
+    
+    
+    # Depricated for new version TRT , but this code worked on GTX850 
+    # allow TensorRT to use up to 1GB of GPU memory for tactic selection
     # builder.max_workspace_size = 1 << 30
 
     #New API in 8.XX TensoarRT
     config = builder.create_builder_config()
-    config.max_workspace_size = 1 << 20
-    
+    workspace = 4 
+    # config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, workspace << 20) # fix TRT 8.4 deprecation notice , use 4 MB workspase
+    config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, workspace << 30) # fix TRT 8.4 deprecation notice, use 4 GB workspase
+
+
     # we have only one image in batch
     builder.max_batch_size = 1
     # use FP16 mode if possible

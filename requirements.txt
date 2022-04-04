@@ -1,3 +1,5 @@
+nvidia-pyindex
+nvidia-tensorrt
 torch==1.2.0
 torchvision==0.4.0
 albumentations==0.4.5

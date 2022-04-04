@@ -91,17 +91,17 @@ if __name__ == '__main__':
     # initialize TensorRT engine and parse ONNX model
     # ONNX_FILE_PATH = "/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/resnet50.onnx"
     # 
-    ONNX_FILE_PATH = "./data/resnet50.onnx"
-    engine, context = build_engine(ONNX_FILE_PATH)
+    # ONNX_FILE_PATH = "./data/resnet50.onnx"
+    # engine, context = build_engine(ONNX_FILE_PATH)
     
     # 2. Second phase serialize engine 
     # Serialize engine and save it to the drive
     # 
-    build_and_serialized_engine(engine)
+    # build_and_serialized_engine(engine)
 
     # 3. Third phase load engine from drive.
 
-    # engine, context, runtime = load_and_deserialized_engine()
+    engine, context, runtime = load_and_deserialized_engine()
 
     # get sizes of input and output and allocate memory required for input data and for output data
     for binding in engine:

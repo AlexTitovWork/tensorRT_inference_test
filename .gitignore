@@ -32,10 +32,14 @@
 *.app
 ./__pycache__
 __pycache__
+__pycache__/preprocessing.cpython-36.pyc
 .vscode
 data/serialized_engine_python.trt
 data/resnet50.onnx
 data/resnet50_engine.trt
+# onnx model
+styleGanEncoder_2.onnx
+styleGanEncoder_2.onnx.onnx
 # data/coffee_cup1.jpg
 # data/coffee_cup2.jpg
 docs
@@ -43,3 +47,4 @@ docs
 CMakeFiles
 CMakeCache.txt
 
+__pycache__/preprocessing.cpython-36.pyc

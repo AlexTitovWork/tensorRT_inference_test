@@ -42,9 +42,9 @@ def postprocess(output_data):
         print(
             "class:",
             classes[class_idx],
-            ", confidence:",
+            "confidence:",
             confidences[class_idx].item(),
-            "%, index:",
+            "index:",
             class_idx.item(),
         )
         # Added return data for server version

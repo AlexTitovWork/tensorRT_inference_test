@@ -99,7 +99,8 @@ class ServerInstantTensorRT:
         output_data = torch.Tensor(self.host_output).reshape(
             self.engine.max_batch_size, self.output_shape[1])
 
-        postprocess(output_data)
+        result_classes  =  postprocess(output_data)
+        return result_classes
 
 
     def build_engine(self, onnx_file_path):
@@ -195,8 +196,14 @@ def load_image():
 def parse_request():
     # data = request.data  # data is empty
     result = server.image_classify()
-    print(result)
-    return jsonify(result)
+    # print(result)
+    response = app.response_class(
+        response=json.dumps(result),
+        status=200,
+        mimetype='application/json'
+    )
+    # return jsonify(result)
+    return response
 
 if __name__ == '__main__':
     # app.run()

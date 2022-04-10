@@ -32,6 +32,7 @@
 *.app
 ./__pycache__
 __pycache__
+.__pycache__
 __pycache__/preprocessing.cpython-36.pyc
 .vscode
 data/serialized_engine_python.trt
@@ -46,5 +47,4 @@ docs
 #Make files and other build stuff
 CMakeFiles
 CMakeCache.txt
-
 __pycache__/preprocessing.cpython-36.pyc

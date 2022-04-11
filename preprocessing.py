@@ -23,6 +23,26 @@ def preprocess_image(img_path):
     batch_data = torch.unsqueeze(input_data, 0)
     return batch_data
 
+# Prepare image for model test 
+# For load and test classify inference
+# New API
+def load_and_preprocess_image(img_decoded):
+    # transformations for the input data
+    transforms = Compose([
+        Resize(224, 224, interpolation=cv2.INTER_NEAREST),
+        Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ToTensor(),
+    ])
+    
+    # read input image
+    # input_img = cv2.imread(img_path)
+    input_img = img_decoded
+    # do transformations
+    input_data = transforms(image=input_img)["image"]
+    batch_data = torch.unsqueeze(input_data, 0)
+    return batch_data
+
+
 # Get human readeable format
 def postprocess(output_data):
     # get class names

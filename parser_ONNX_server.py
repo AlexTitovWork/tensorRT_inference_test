@@ -4,17 +4,23 @@ import pycuda.autoinit
 import numpy as np
 import tensorrt as trt
 import torch
-
+import cv2
 
 from preprocessing import preprocess_image
 from preprocessing import postprocess
+# For server new API 
+from preprocessing import load_and_preprocess_image
 import json
 from pprint import pprint
-from flask import Flask, request, jsonify
+# Flask support server and client side
+from flask import Flask, request, jsonify, Response
+import jsonpickle
+
 # logger to capture errors, warnings, and other information during the build and inference phases
 TRT_LOGGER = trt.Logger()
 
-
+'''Server test'''
+# time curl -X GET -H "Content-type: application/json" -d "{""}" "http://127.0.0.1:5000/get_classes"
 
 class ServerInstantTensorRT:
     engine = []
@@ -102,6 +108,33 @@ class ServerInstantTensorRT:
         result_classes  =  postprocess(output_data)
         return result_classes
 
+    '''load image from client side and classify it with RESNET50'''
+    def image_load_and_classify(self, img):
+        print("Method in call image_classify() started...")
+        
+        # Moved this part to the server listener side
+        # preprocess input data
+        # host_input = np.array(preprocess_image("/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/coffee_cup1.jpg").numpy(), dtype=np.float32, order='C')
+        self.host_input = np.array(load_and_preprocess_image(img).numpy(), dtype=np.float32, order='C')
+        # host_input = np.array(preprocess_image("/home/interceptor/Документы/Git_Medium_repo/Binary_search_engine_CUDA/tensorRT/tensorRT_pytorch_to_onxx/data/sofa.jpeg").numpy(), dtype=np.float32, order='C')
+        cuda.memcpy_htod_async(self.device_input, self.host_input, self.stream)
+        # run inference
+        self.context.execute_async(bindings=[int(self.device_input), int(self.device_output)], stream_handle=self.stream.handle)
+        cuda.memcpy_dtoh_async(self.host_output, self.device_output, self.stream)
+        self.stream.synchronize()
+
+        # postprocess results
+        # output_data = torch.Tensor(host_output).reshape(engine.max_batch_size, output_shape[0],output_shape[1])
+        output_data = torch.Tensor(self.host_output).reshape(
+            self.engine.max_batch_size, self.output_shape[1])
+
+        result_classes  =  postprocess(output_data)
+        return result_classes
+
+
+
+
+
 
     def build_engine(self, onnx_file_path):
         # initialize TensorRT engine and parse ONNX model
@@ -181,17 +214,24 @@ class ServerInstantTensorRT:
 # https://stackoverflow.com/questions/49595175/pycuda-context-error-when-using-flask
 
 app = Flask(__name__)
+
 with app.app_context():
 
     server = ServerInstantTensorRT()
     print(server)
     print("ResNet50 started on the Flask Server ok!")
-
+'''
+    Test server connection. 
+'''
 @app.route('/image_classify', methods=['POST'])
-def load_image():
+def image_classify_api():
     server.image_classify()
     return "OK"
 
+'''
+    Test for classify image on server without transfering to API endpoint.
+    Just API command to classify and inference result. 
+'''
 @app.route('/get_classes', methods=['GET'])
 def parse_request():
     # data = request.data  # data is empty
@@ -205,7 +245,38 @@ def parse_request():
     # return jsonify(result)
     return response
 
+'''
+    Getting image from client side and classify it using ResNet50
+    Data image load endpoint. 
+'''
+# route http posts to this method
+@app.route('/load_image', methods=['POST'])
+def load_image_api():
+    r = request
+    # convert string of image data to uint8
+    nparr = np.fromstring(r.data, np.uint8)
+    # decode image
+    # img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    img_decoded = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
+    result = server.image_load_and_classify(img_decoded)
+
+    # build a response dict to send back to client
+
+    response = {
+        'message': 'image received. size={}x{}'.format(img_decoded.shape[1], img_decoded.shape[0]), 
+        'data': json.dumps(result)
+    }
+    # encode response using jsonpickle
+    response_pickled = jsonpickle.encode(response)
+
+    return Response(response=response_pickled, status=200, mimetype="application/json")
+
+
+
+
+
 if __name__ == '__main__':
     # app.run()
-    app.run(debug=True, use_reloader=False, threaded=False) # FIX
+    app.run(host="0.0.0.0", port=5000, debug=True, use_reloader=False, threaded=False) # FIX
 

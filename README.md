@@ -19,6 +19,7 @@ This model not portable on other machine. We need creating it from ONNX model in
   "time python /tensorRT/tensorRT_inference_test/parser_ONNX_client.py"
 - For monitoring memory usage of GPU:
   "nvitop -m"
+  -------------------------------------------------------------------
 - For test Flask endpoint availability use small test like this:
 "time curl -X GET -H "Content-type: applicat
 ion/json" -d "{""}" "http://127.0.0.1:5000/get_classes""
@@ -47,3 +48,5 @@ ion/json" -d "{""}" "http://127.0.0.1:5000/get_classes""
     real    0m11,992s
     user    0m0,012s
     sys     0m0,013s"
+- Note. Using MPS not improove inference with TensorRT+Flask+Python, try to test.
+  "nvidia-cuda-mps-control -f" 

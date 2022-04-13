@@ -6,7 +6,8 @@ import cv2
 '''
 usage curl command instead client request
 time curl -X GET -H "Content-type: application/json" -d "{""}" "http://127.0.0.1:5000/get_classes"
-
+Code example for server-client image request (link)
+ https://gist.github.com/kylehounslow/767fb72fde2ebdd010a0bf4242371594
 '''
 
 def get_classes_test():

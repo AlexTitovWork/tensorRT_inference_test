@@ -188,6 +188,7 @@ class ServerInstantTensorRT:
 
         serialized_engine = engine.serialize();
         with open("./data/serialized_engine_python.trt", "wb") as f:
+        # with open("./data/resnet50_engine.trt", "wb") as f:
             f.write(serialized_engine)
     '''
     Load and deserialization engine to runtime
@@ -196,6 +197,7 @@ class ServerInstantTensorRT:
         logger = trt.Logger(trt.Logger.WARNING)
         runtime = trt.Runtime(logger)
         with open("./data/serialized_engine_python.trt", "rb") as f:
+        # with open("./data/resnet50_engine.trt", "rb") as f:
             serialized_engine = f.read()
         
         engine = runtime.deserialize_cuda_engine(serialized_engine)

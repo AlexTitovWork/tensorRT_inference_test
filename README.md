@@ -2,7 +2,8 @@
 The tensor RT inference test of resnet50 classifyer. 
 
 ./trtexec --onnx=./data/resnet50.onnx --saveEngine=./data/resnet50_engine.trt
-
+OR with installation path:
+/usr/src/tensorrt/bin$ ./trtexec --onnx=./data/resnet50.onnx --saveEngine=./data/resnet50_engine.trt
 
 <!-- ADDED  -->
 Flask service with low time inference ResNet50 model.
